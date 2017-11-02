@@ -92,11 +92,11 @@ function start() {
 		.attr("r", 0)
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout);
+		.on("mouseout", mouseout)
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
-		.on("click", click);
+    .on("click", click_ball);
 
 		force.gravity(0)
 			.friction(0.75)
@@ -107,7 +107,7 @@ function start() {
 		node.transition()
 			.duration(2500)
 			.attr("r", function(d) { return d.radius; });
-},
+}
 
 function total() {
 
@@ -338,7 +338,8 @@ function mouseout() {
 		d3.select(".tooltip")
 			.style("display", "none");
 		}
-function click(d) {
+
+function click_ball(d) {
 	var donor = d.donor;
 	window.open("https://www.google.com/search?q=" + donor);
 }
