@@ -108,10 +108,6 @@ function start() {
 			.duration(2500)
 			.attr("r", function(d) { return d.radius; });
 },
-function click(d) {
-	var donor = d.donor;
-	window.open("https://www.google.com/search?q=" + donor);
-},
 
 function total() {
 
@@ -343,6 +339,10 @@ function mouseout() {
 		d3.select(".tooltip")
 			.style("display", "none");
 		}
+function click(d) {
+	var donor = d.donor;
+	window.open("https://www.google.com/search?q=" + donor);
+}
 
 $(document).ready(function() {
 		d3.selectAll(".switch").on("click", function(d) {
