@@ -96,6 +96,7 @@ function start() {
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
+		.on("click", click);
 
 		force.gravity(0)
 			.friction(0.75)
@@ -106,7 +107,7 @@ function start() {
 		node.transition()
 			.duration(2500)
 			.attr("r", function(d) { return d.radius; });
-}
+},
 
 function total() {
 
@@ -337,6 +338,10 @@ function mouseout() {
 		d3.select(".tooltip")
 			.style("display", "none");
 		}
+function click(d) {
+	var donor = d.donor;
+	window.open("https://www.google.com/search?q=" + donor);
+}
 
 $(document).ready(function() {
 		d3.selectAll(".switch").on("click", function(d) {
