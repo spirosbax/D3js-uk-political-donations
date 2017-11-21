@@ -67,6 +67,14 @@
             <p>Data is based on all reportable donations over &#163;7500.</p>
             <p>Data source: <a href="http://www.electoralcommission.org.uk/">The Electoral Commission.</a>
             </p>
+            <script>
+            var words = $("p").text().split(" ");
+            $("p").empty();
+            $.each(words, function(i, v) {
+                $("p").append($("<span>").text(v));
+            });
+            </script>
+            
         </div>
         <div id="value-scale">
             <div id="f">
