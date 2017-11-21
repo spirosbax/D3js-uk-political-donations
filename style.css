@@ -6,7 +6,7 @@ body {
 span {line-height: 20px; font-size: 14px;}
 span:hover {font-size: 30px;}
 
-p {
+p, p1, p2, p3, p4 ,p5 {
     margin: 5px 0;
 }
 strong {
