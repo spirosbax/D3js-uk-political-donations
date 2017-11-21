@@ -3,6 +3,9 @@ body {
     font-family:'Raleway', 'Open Sans', sans-serif;
 }
 
+span {line-height: 20px; font-size: 14px; display: block; height: 20px;}
+span:hover {font-size: 20px;}
+
 p {
     margin: 5px 0;
 }
