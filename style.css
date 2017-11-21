@@ -3,19 +3,6 @@ body {
     font-family:'Raleway', 'Open Sans', sans-serif;
 }
 
-a{
-    position: absolute;
-}
-
-.zoom {
-  -webkit-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
-}
-.zoom:hover {
-  -webkit-transform: scale(1.4);
-          transform: scale(1.4);
-}
-
 p {
     margin: 5px 0;
 }
