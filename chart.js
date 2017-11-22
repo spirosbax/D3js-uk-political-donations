@@ -327,7 +327,13 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
-	}
+	
+	//enable voice synthesis on hover
+	responsiveVoice.speak(donor, "UK English Male");
+	responsiveVoice.speak(amount, "UK English Male");
+
+	
+}
 
 function mouseout() {
 	// no more tooltips
@@ -337,6 +343,10 @@ function mouseout() {
 
 		d3.select(".tooltip")
 			.style("display", "none");
+		}
+		
+		if(responsiveVoice.isPlaying()){
+			responsiveVoice.cancel();
 		}
 
 function click_ball(d) {
