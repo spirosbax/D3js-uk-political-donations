@@ -45,6 +45,7 @@ function transition(name) {
 	if (name === "all-donations") {
 		$("#initial-content").fadeIn(250);
 		$("#value-scale").fadeIn(1000);
+		$("#amount-scale").fadeOut(1000);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
@@ -54,27 +55,44 @@ function transition(name) {
 	if (name === "group-by-party") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
+		$("#amount-scale").fadeOut(1000);
+	  $("#view-party-type").fadeIn(1000);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
-		$("#view-party-type").fadeIn(1000);
+		$("#view-by-amount-of-donation").fadeOut(1000);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
+		$("#amount-scale").fadeOut(1000);
 		$("#view-party-type").fadeOut(250);
-		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
+		$("#view-source-type").fadeOut(250);
+		$("#view-by-amount-of-donation").fadeOut(1000);
 		return donorType();
 	}
-	if (name === "group-by-money-source")
+  if (name === "group-by-money-source"){
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
-		$("#view-donor-type").fadeOut(250);
+		$("#amount-scale").fadeOut(1000);
 		$("#view-party-type").fadeOut(250);
+		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
+		$("#view-by-amount-of-donation").fadeOut(1000);
 		return fundsType();
 	}
+  if (name == "group-by-amount-of-donation"){
+	  $("#initial-content").fadeOut(250);
+		$("#value-scale").fadeOut(250);
+		$("#amount-scale").fadeIn(1000);
+		$("#view-party-type").fadeOut(250);
+		$("#view-donor-type").fadeOut(250);
+		$("#view-source-type").fadeOut(1000);
+		$("#view-by-amount-of-donation").fadeIn(1000);
+		return amountSize();
+  }
+}
 
 function start() {
 
@@ -143,6 +161,15 @@ function fundsType() {
 		.start();
 }
 
+function amountSize(e){
+    force.gravity(0)
+		    .friction(0.8)
+		    .charge(function(d) { return -Math.pow(d.radius, 2.0) / 3; })
+		    .on("tick", amounts)
+		    .start()
+        .colourByParty();
+}
+
 function parties(e) {
 	node.each(moveToParties(e.alpha));
 
@@ -160,9 +187,15 @@ function entities(e) {
 function types(e) {
 	node.each(moveToFunds(e.alpha));
 
-
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
+}
+
+function amounts(e) {
+	  node.each(moveToAmounts(e.alpha));
+
+		node.attr("cx", function(d) { return d.x; })
+			  .attr("cy", function(d) {return d.y; });
 }
 
 function all(e) {
@@ -240,6 +273,30 @@ function moveToFunds(alpha) {
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
+}
+
+function moveToAmounts(alpha) {
+    return function(d){
+        var centreX = svgCentre.x + 150;
+        if (d.value <= 25001) {
+            centreY = svgCentre.y - 220;
+        } else if (d.value <= 50001) {
+            centreY = svgCentre.y - 140;
+        } else if (d.value <= 100001) {
+            centreY = svgCentre.y - 40;
+        } else  if (d.value <= 500001) {
+            centreY = svgCentre.y + 40;
+        } else  if (d.value <= 1000001) {
+            centreY = svgCentre.y + 130;
+        } else  if (d.value <= maxVal) {
+            centreY = svgCentre.y + 265;
+        } else {
+            centreY = svgCentre.y;
+        }
+
+		    d.x += (centreX - d.x) * (brake + 0.5) * alpha;
+		    d.y += (centreY - 100 - d.y) * (brake + 0.5) * alpha;
+    };
 }
 
 // Collision detection function by m bostock
@@ -327,16 +384,15 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
-	
-	//enable voice synthesis on hover
-	responsiveVoice.speak(donor, "UK English Male");
-	responsiveVoice.speak(amount, "UK English Male");
 
-	
+	//enable voice synthesis on hover
+	responsiveVoice.speak(donor+amount, "UK English Female");
 }
 
 function mouseout() {
-	// no more tooltips
+		responsiveVoice.cancel();
+
+	  // no more tooltips
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);
@@ -344,10 +400,7 @@ function mouseout() {
 		d3.select(".tooltip")
 			.style("display", "none");
 		}
-		
-		if(responsiveVoice.isPlaying()){
-			responsiveVoice.cancel();
-		}
+
 
 function click_ball(d) {
 	var donor = d.donor;
