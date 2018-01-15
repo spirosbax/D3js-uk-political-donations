@@ -25,12 +25,12 @@ li {
 
 /* 	Information boxes for different chart layouts */
 /* Positioning */
-#initial-content, #a, #b, #c, #d, #e, #f, #am1, #am2, #am3, #am4, #am5, #bw0to25k, #bw25kto50k, #bw50kto100k, #bw100kto500k, #bw500kto1m, #bw1mto, #view-party-type, #view-donor-type, #view-source-type, #partyInfo, #conservative, #labour, #libdem, #individual, #company, #union, #society, #other, #public-or-private-money, #public-or-private-money-split, #private-money, #public-money, #view-amount-of-donation {
+#initial-content, #a, #b, #c, #d, #e, #f, #am1, #am2, #am3, #am4, #am5, #view-party-type, #view-donor-type, #view-source-type, #partyInfo, #conservative, #labour, #libdem, #individual, #company, #union, #society, #other, #public-or-private-money, #public-or-private-money-split, #private-money, #public-money, #view-amount-of-donation {
     position: absolute;
 }
 
 /* Initial appearance on load */
-#view-party-type, #view-donor-type, #view-source-type, #amount-scale, #amount-description{
+#view-party-type, #view-donor-type, #view-source-type, #amount-scale{
     display: none;
 }
 
@@ -107,40 +107,28 @@ li {
 }
 
 /*  Amount of donation layout  */
-#amount-description {
-    font-size: 0.65;
-}
+/* #0To25k, #25kTo50k, #50kTo100k, #100kTO500k, #500kTo1m { padding: 10px; } */
+/* #0To25k { */
+/*     background: rgba(189,169,137,0.5); */
+/*     top: 110px; */
+/* } */
+/* #0To25k { */
+/*     background: rgba(0,169,137,0.5); */
+/*     top: 210px; */
+/* } */
+/* #0To25k { */
+/*     background: rgba(189,169,0,0.5); */
+/*     top: 310px; */
+/* } */
+/* #0To25k { */
+/*     background: rgba(189,169,150,0.5); */
+/*     top: 410px; */
+/* } */
+/* #0To25k { */
+/*     background: rgba(189,200,137,0.5); */
+/*     top: 510px; */
+/* } */
 
-#bw0to25k {
-    background: rgba(236, 39, 39, 0.19);
-    right: 900px;
-    top: 150px;
-}
-#bw25kto50k {
-    background: rgba(237, 56, 56, 0.33);
-    right: 842px;
-    top: 240px;
-}
-#bw50kto100k {
-    background: rgba(228, 54, 54, 0.54);
-    right: 833px;
-    top: 340px;
-}
-#bw100kto500k {
-    background: rgba(235, 69, 69, 0.78);
-    right: 822px;
-    top: 450px;
-}
-#bw500kto1m {
-    background: rgba(240, 65, 65, 1);
-    right: 787px;
-    top: 570px;
-}
-#bw1mto {
-    background: rgba(255, 0, 0, 0.86);
-    right: 895px;
-    top: 670px;
-}
 
 #amount-scale {
     opacity: 0.9;
