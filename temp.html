@@ -1,0 +1,50 @@
+
+<!doctype html>
+
+
+<head>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+</head>
+<body>
+    <div id="chartContainer">
+
+    <script type="text/javascript">
+    // var svg = dimple.newSvg("body", 800, 600);
+    // d3.csv("/data/7500up.csv", function(data){
+        // var chart = new dimple.chart(svg, data);
+        // chart.addCategoryAxis("x", "party");
+        // chart.addMeasureAxis("y", "amount");
+        // chart.addSeries(null, dimple.plot.bar);
+        // chart.draw();
+    // });
+
+    // var svg = dimple.newSvg("body", 800, 600);
+    // d3.csv("/data/7500up.csv", function(data){
+        // var myChart = new dimple.chart(svg, data);
+            // myChart.setBounds(20, 20, 460, 360);
+            // myChart.addMeasureAxis("p", "amount");
+            // var ring = myChart.addSeries("party", dimple.plot.pie);
+            // ring.innerRadius = "50%";
+            // myChart.addLegend(500, 20, 90, 300, "left");
+            // myChart.draw();
+        // });
+
+    var svg = dimple.newSvg("#chartContainer", 590, 400);
+    d3.csv("/data/7500up.csv", function(data){
+        // data = dimple.filterData(data, "Owner", ["Aperture", "Black Mesa"]);
+        var myChart = new dimple.chart(svg, data);
+        myChart.setBounds(90, 30, 320, 330)
+        myChart.addMeasureAxis("x", "amount");
+        var y = myChart.addCategoryAxis("y", "entityname");
+        var s = myChart.addSeries("party", dimple.plot.area);
+        s.interpolation = "step";
+        s.lineWeight = 2;
+        s.barGap = 0.05;
+        myChart.addLegend(430, 20, 100, 300, "left");
+        myChart.draw();
+    });
+    </script>
+    </div>
+</body>
